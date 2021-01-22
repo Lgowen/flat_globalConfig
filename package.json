@@ -5,5 +5,11 @@
   "repository": "git@github.com:JASONPANGGO/flat_globalConfig.git",
   "author": "jasonpang <jason_pang@126.com>",
   "license": "MIT",
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
 }
