@@ -86,7 +86,6 @@ export const globalConfig = {
           "value": 36
         },
         {
-          "pl_key": "wocaohaoniubia",
           "type": "array",
           "items": [
             {
@@ -107,7 +106,6 @@ export const globalConfig = {
               "value": 36
             },
             {
-              "pl_key": "tanyawen",
               "type": "array",
               "items": [
                 {

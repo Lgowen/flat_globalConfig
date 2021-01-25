@@ -1,34 +1,35 @@
 import { globalConfig } from './data.js'
 
-function isArr(gameConfig) {
+function flatObj(gameConfig) {
     let GAME_CFG = {}
     for (let uniqueKey in gameConfig) {
+        // 获取每一个对象
         const configItem = gameConfig[uniqueKey]
-        if (configItem.type !== 'array') {
-            GAME_CFG[uniqueKey] = configItem.value
-        }else {
-            const arrItems = configItem.items
-            const len = arrItems.length
-            for (let i = 0; i < len; i++) {
-                if (arrItems[i].type !== 'array') {
-                    const key = arrItems[i]['pl_key']
-                    GAME_CFG[key] = arrItems[i].value
-                } else {
-                    const NEW_GAME_CFG = isArr(arrItems[i])
-                    GAME_CFG = { ...GAME_CFG, ...NEW_GAME_CFG }
-                }
-            }
-        }
+        // 如果不是数组类型，直接取值，否则做数组处理
+        configItem.type !== 'array' ? GAME_CFG[uniqueKey] = configItem.value : Object.assign(GAME_CFG, flatArr(configItem))
     }
     return GAME_CFG
 }
 
-function changeConfig ({autoEndTime, playAgain, gameConfig}) {
-    let GAME_CFG = {autoEndTime, playAgain}
-    const ARR_GAME_CFG = isArr(gameConfig)
-    GAME_CFG = {...GAME_CFG, ...ARR_GAME_CFG}
+function flatArr(typeArr) {
+    let GAME_CFG = {}
+    const arrItems = typeArr.items
+    const len = arrItems.length
+    // 遍历items
+    for (let i = 0; i < len; i++) {
+        // 如果不是数组类型，直接取值
+        arrItems[i].type !== 'array' ? GAME_CFG[arrItems[i]['pl_key']] = arrItems[i].value : Object.assign(GAME_CFG, flatArr(arrItems[i]))
+    }
     return GAME_CFG
 }
 
-const GAME_CFG = changeConfig(globalConfig)
+function flatGlobalConfig ({autoEndTime, playAgain, gameConfig}) {
+    return {
+        autoEndTime,
+        playAgain,
+        ...flatObj(gameConfig)
+    }
+}
+
+const GAME_CFG = flatGlobalConfig(globalConfig)
 console.log(GAME_CFG)
