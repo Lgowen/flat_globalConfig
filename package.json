@@ -1,0 +1,15 @@
+{
+  "name": "flat-global-config",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:JASONPANGGO/flat_globalConfig.git",
+  "author": "jasonpang <jason_pang@126.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
